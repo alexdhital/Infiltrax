@@ -1,6 +1,8 @@
 # Infiltrax
 Infiltrax is a post-exploitation reconnaissance tool for penetration testers and red teams, designed to capture screenshots, retrieve clipboard contents, log keystrokes, and install AnyDesk for persistent remote access. 
 
+![Infiltrax](https://raw.githubusercontent.com/alexdhital/Infiltrax/main/vlau.gif)
+
 ## Features
 
 - **Screenshot Capture**: Take screenshots of the entire screen and save them as PNG files.
