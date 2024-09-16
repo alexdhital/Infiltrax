@@ -8,6 +8,7 @@ Infiltrax is a post-exploitation reconnaissance tool for penetration testers and
 - **Screenshot Capture**: Take screenshots of the entire screen and save them as PNG files.
 - **Clipboard Retrieval**: Access the current clipboard contents.
 - **Keystroke Logging**: Record keystrokes for a specified duration.
+- **UAC Bypass**: Bypasses UAC via fodhelper.exe
 - **AnyDesk Installation**: Install and configure AnyDesk with unattended access.
 
 ## Usage
