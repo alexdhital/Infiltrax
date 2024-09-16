@@ -30,8 +30,8 @@ C:\Users\Administrator\Desktop> Invoke-KeyStrokeCapture -DurationInSeconds 30 -O
 ```
 5. **Bypass UAC to run any program in elevated context. Default program powershell.exe**
 
-  This function is taken from https://gist.github.com/netbiosX/a114f8822eb20b115e33db55deee6692 all credit goes to netbiosX :). Spawnning cmd.exe or powersell.exe from script gets caught by behavioural detection 
-  disable defender or unhook EDR first.
+    This function is taken from https://gist.github.com/netbiosX/a114f8822eb20b115e33db55deee6692 all credit goes to netbiosX :). Spawnning cmd.exe or powersell.exe from script gets caught by behavioural 
+    detection disable defender or unhook EDR first.
 ```powershell
 C:\Users\Vlex\Desktop> Invoke-FodHelperBypass -program "calc.exe"
 ```
