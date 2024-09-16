@@ -26,7 +26,7 @@ C:\Users\Administrator\Desktop> Invoke-Screenshot -Path "C:\Windows\Tasks\"
 ```
 4. **Capture user keystrokes and save in a file**
 ```powershell
-C:\Users\Administrator\Desktop> Invoke-KeyStrokeCapture -DurationInSeconds 30 -OutputPath C:\Windows\Tasks\keystrokes.txt
+C:\Users\Administrator\Desktop> Invoke-KeyStrokeCapture -DurationInSeconds 30 -OutputPath C:\Users\Vlex\Desktop\keystrokes.txt
 ```
 5. **Bypass UAC to run any program in elevated context. Default program powershell.exe**
 
