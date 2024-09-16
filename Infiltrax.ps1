@@ -285,12 +285,13 @@ function Invoke-FodHelperBypass {
 .SYPNOSIS
 
     Bypasses UAC via fodhelper.exe to run powershell process in elevated session.
-    This script is taken from https://gist.github.com/netbiosX/a114f8822eb20b115e33db55deee6692 who is the original author.
+    This function is taken from https://gist.github.com/netbiosX/a114f8822eb20b115e33db55deee6692 who is the original author.
 
 .NOTES
    
-    File Name  : Infiltrax.ps1 
-    Original function Author     : netbiosX. - pentestlab.blog 
+    File Name: Infiltrax.ps1 
+    Original function Author: netbiosX. - pentestlab.blog 
+    Spawnning powershell or cmd from script gets caught by behavioural detection. Disable Real Time protection or unhook EDR first
 
 #>
 
